@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>detail</title>
+</head>
+<body>
+<h1 style="align-content: center">welcome</h1>
+{% for line in data %}
+    <tr>
+    <td>{{ line.docname }}</td>
+    <td>{{ line.content }}</td>
+    <td href="">file</td>
+    </tr>
+{% endfor %}
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">body {background-image:url(/static/img/me.jpg);}</style>
+    <title>user add</title>
+</head>
+<body>
+{% extends "login.html" %}
+{%  block content %}
+<h1 style="align-content: center">user insert</h1>
+<form action="/useradd/" method="post">
+    <input type="text" name="username"/>
+    <hr class="layui-bg-green">
+    <input type="password" name="password"/>
+    <hr class="layui-bg-green">
+    <select name="cor">
+        <option value ="pbc">pbc</option>
+        <option value ="bank">bank</option>
+    </select>
+    <hr class="layui-bg-green">
+    <select name="dep">
+        <option value ="tech">tech</option>
+        <option value ="bgs">bgs</option>
+        <option value="dt">dt</option>
+        <option value="jrwd">jrwd</option>
+    </select>
+    <hr class="layui-bg-green">
+    <input class="layui-btn" type="submit" value="submit"/>
+</form>
+<h1>{{ err_msg }}</h1>
+<tbody>
+{% for line in user %}
+    <tr>
+    <td>{{ line.username }}</td>
+    <td>{{ line.password }}</td>
+    </tr>
+{% endfor %}
+</tbody>
+{% endblock %}
+</body>
+</html>
