@@ -24,7 +24,6 @@
     </form>
 <h1>{{ err_msg }}</h1>
     <div style="width: 650px; position: relative; left:25%;">
-
    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px">
       <legend>翻页（layui风格+django功能）</legend>
     </fieldset>
@@ -64,7 +63,6 @@
                 <a href="?page={{ db.previous_page_number }}"><i class="layui-icon">&#xe65a;</i></a>
             </button>
         {% endif %}
-
         <span class="current">
             <button class="layui-btn">
                 第 {{ db.number }}页  共 {{ db.paginator.num_pages }}页
