@@ -43,7 +43,7 @@
         </thead>
       <tbody>
       <tr>
-      {% for contact in db %}
+      {% for contact in pagelist %}
       <td>{{ contact.docname }}</td>
       <td>{{ contact.author_id }}</td>
       <td>{{ contact.createdtime }}</td>
@@ -55,61 +55,36 @@
 
     <div class="pagination">
     <span class="step-links">
-        {% if db.has_previous %}
+        {% if pagelist.has_previous %}
             <button class="layui-btn">
                 <a href="?page=1">第一页</a>
             </button>
             <button class="layui-btn">
-                <a href="?page={{ db.previous_page_number }}"><i class="layui-icon">&#xe65a;</i></a>
+                <a href="?page={{ pagelist.previous_page_number }}"><i class="layui-icon">&#xe65a;</i></a>
             </button>
         {% endif %}
         <span class="current">
             <button class="layui-btn">
-                第 {{ db.number }}页  共 {{ db.paginator.num_pages }}页
+                第 {{ pagelist.number }}页  共 {{ pagelist.paginator.num_pages }}页
             </button>
         </span>
 
-        {% if db.has_next %}
+        {% if pagelist.has_next %}
             <button class="layui-btn">
-                <a href="?page={{ db.next_page_number }}"><i class="layui-icon">&#xe65b;</i></a>
+                <a href="?page={{ pagelist.next_page_number }}"><i class="layui-icon">&#xe65b;</i></a>
             </button>
 
             <button class="layui-btn">
-                <a href="?page={{ db.paginator.num_pages }}">最后一页</a>
+                <a href="?page={{ pagelist.paginator.num_pages }}">最后一页</a>
             </button>
         {% endif %}
     </span>
 </div>
 </div>
 
-
-
-
-{#    <colgroup>#}
-{#        <col width="150">#}
-{#        <col width="200">#}
-{#        <col>#}
-{#    </colgroup>#}
-{#    <thead>#}
-{#    <tr>#}
-{#        <th>docname</th>#}
-{#        <th>author</th>#}
-{#        <th>createdtime</th>#}
-{#        <th>file</th>#}
-{#    </tr>#}
-{#    </thead>#}
-{#        <tbody>#}
-{#    {% for line in data %}#}
-{#    <tr>#}
-{#    {% if line.author_id == user.id %}#}
-{#    <td>{{ line.docname }}</td>#}
-{#    <td>{{ line.author_id }}</td>#}
-{#    <td>{{ line.createdtime }}</td>#}
-{#    <td href="/file/{{ line.file }}"><button class="layui-btn">download</button> </td>#}
-{#    {% endif %}#}
-{#    </tr>#}
-{#{% endfor %}#}
-<a href="{{ link }}">link</a>
+    {% for download in download_list %}
+<li><a href="{{ link }}">link</a></li>
+    {% endfor %}
 {% if msg %}
     <script>
         alert('{{ msg }}')
@@ -120,7 +95,7 @@
 
 <img src="/static/img/zx.jpg">
     </div>
-
+<a href="{% url 'datalist' %}">datalist</a>
 
 {% endblock %}
 </body>

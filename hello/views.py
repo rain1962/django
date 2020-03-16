@@ -5,7 +5,7 @@ from .form import LoginField
 from hello.models import user,doc
 from functools import wraps
 from django.core.paginator import Paginator
-import json
+from sendfile import sendfile
 import time
 import os
 import json
@@ -62,7 +62,7 @@ def index(request):
     data=serializers.serialize('json',db)
     paginator=Paginator(db,3)
     page=request.GET.get('page')
-    dbdata=paginator.get_page(page)
+    pagelist=paginator.get_page(page)
     print(json.loads(data))
     filename=''
     msg=''
@@ -86,12 +86,23 @@ def index(request):
             msg='success'
         else:
             msg='error'
-    link=filepath+'/'+filename
-    if userobj:
-        return render(request,'index.html', {'user': userobj[0],'msg':msg,'dara':data,'link':link,'db':dbdata})
-    else:
-        return render(request,'index.html', {'user': 'unkown','msg':msg,'data':data,'link':link})
+    fileurl=filepath+'/'+filename
 
+    if userobj:
+        return render(request,'index.html', {'user': userobj[0],'msg':msg,'dara':data,'pagelist':pagelist})
+    else:
+        return render(request,'index.html', {'user': 'unkown','msg':msg,'data':data})
+@check_login
+def datalist(request):
+    # user_id1 = request.session.get('user_id')
+    # userobj = user.objects.filter(id=user_id1)
+    # filepath = 'file/{}'.format(userobj[0].username)
+    # filename=''
+    # if request.method=='POST':
+    #     filename=request.FILES.get('filename')
+    # fileurl = filepath + '/' + filename
+    # return sendfile(request,filename=fileurl,attachment=True)
+    return HttpResponse("1")
 def download_file(request,filename):
     try:
         user_id1 = request.session.get('user_id')

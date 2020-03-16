@@ -21,5 +21,6 @@ urlpatterns = [
     path('index/', views.index),
     path('useradd/',views.useradd),
     path('login/',views.login),
+    path('datalist/',views.datalist,name='datalist'),
     path(r'^file/(?P<filename>.*)/$',views.download_file),
 ]
